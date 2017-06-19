@@ -13,7 +13,7 @@ begin
   q.subscribe(:manual_ack => true, :block => true) do |delivery_info, properties, body|
     puts " [x] Received '#{body}'"
     # imitate some work
-    sleep body.count(".").to_i
+    sleep 5
     puts " [x] Done"
     ch.ack(delivery_info.delivery_tag)
   end
