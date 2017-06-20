@@ -1,15 +1,29 @@
 require "bunny"
 
-conn = Bunny.new
+pid = Process.pid
+
+puts "[#{pid}] Specify server IP (localhost): "
+host = gets.chomp
+host = "localhost" if host.empty?
+
+conn = Bunny.new(host: host)
 conn.start
 
 ch   = conn.create_channel
-q    = ch.queue("task_queue", :durable => true)
+q    = ch.queue("task_queue", durable: true)
 
-msg  = ARGV.empty? ? "Hello World!" : ARGV.join(" ")
+puts "[#{pid}] Sending infinite work. To exit press CTRL+C"
+begin
+	loop do
+		number = rand(10)
+		work = "." * number
+		print work
+		q.publish(work, persistent: true)
+		sleep 5
+	end
+rescue Interrupt
+  puts "\n[#{pid}] Closing connection"
+  conn.close
+end
 
-q.publish(msg, :persistent => true)
-puts " [x] Sent #{msg}"
-
-sleep 1.0
-conn.close
+puts "[#{pid}] Shutting down"
