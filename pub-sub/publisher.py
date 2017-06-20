@@ -19,11 +19,12 @@ pid = os.getpid()
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
+# Specify exchange this time since fanout publishing is not allowed for nameless exchanges
 channel.exchange_declare(exchange='logs',
                          type='fanout')
 
-message = "INFO: " + (' '.join(sys.argv[1:]) or "Hello World!")
 while True:
+    message = "INFO: " + (' '.join(sys.argv[1:]) or "Hello at %i" % time.time())
     channel.basic_publish(exchange='logs',
                           routing_key='',
                           body=message)
