@@ -1,20 +1,23 @@
 # RabbitMQDemo
 
-## General prerequisites:
-1)Earlang 19.3 (http://www.erlang.org/downloads)
+Simple usage examples of [RabbitMQ](https://www.rabbitmq.com/getstarted.html) in various languages.  All code is based off of their tutorials (see previous link)
 
-2)RabbitMQ 3.6.10 (https://www.rabbitmq.com/download.html)
+## Dependencies
 
-### For Python impl:
-3)Python 3.x.x (https://www.python.org/downloads/)
+### General
+- [Earlang 19.3](http://www.erlang.org/downloads)
+- [RabbitMQ 3.6.10](https://www.rabbitmq.com/download.html)
 
-### For Ruby impl:
-3)Ruby 2.4.x (https://www.ruby-lang.org/en/documentation/installation/)
+### For Python examples
+- [Python 3.x.x](https://www.python.org/downloads/)
+
+### For Ruby examples
+- [Ruby 2.4.x](https://www.ruby-lang.org/en/documentation/installation/)
 
 ## Setup
+`cd Setup` and run:
 
-### Python:
-4) Run `./Python/setup.py` (This will install pip (package installer) and pika via pip (pure-Python implementation of the AMQP 0-9-1 protocol).
-
-### Ruby:
-1) Run `./Ruby/setup.rb` (This will install bunny gem)
+- `python Setup/setup.py` to install pip (package installer) and pika via pip (pure-Python implementation of the AMQP 0-9-1 protocol).
+    - Only required for running Python examples
+- `ruby Setup/setup.rb` to install bunny gem
+    - Only required for running Ruby examples
